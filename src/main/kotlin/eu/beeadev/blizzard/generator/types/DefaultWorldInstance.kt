@@ -1,4 +1,4 @@
-package eu.beeadev.blizzard.world.types
+package eu.beeadev.blizzard.generator.types
 
 import net.minestom.server.coordinate.Point
 import net.minestom.server.entity.Player
