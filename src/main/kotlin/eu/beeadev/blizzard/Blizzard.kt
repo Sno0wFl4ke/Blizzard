@@ -3,6 +3,7 @@ package eu.beeadev.blizzard
 import eu.beeadev.blizzard.commands.FlyCommand
 import eu.beeadev.blizzard.commands.GodCommand
 import eu.beeadev.blizzard.commands.InstantBreakCommand
+import eu.beeadev.blizzard.commands.SuicideCommand
 import eu.beeadev.blizzard.events.HandlePlayerJoinEvent
 import net.minestom.server.MinecraftServer
 import net.minestom.server.MinecraftServer.getCommandManager
@@ -36,5 +37,6 @@ object Blizzard {
         getCommandManager().register(FlyCommand())
         getCommandManager().register(InstantBreakCommand())
         getCommandManager().register(GodCommand())
+        getCommandManager().register(SuicideCommand())
     }
 }
