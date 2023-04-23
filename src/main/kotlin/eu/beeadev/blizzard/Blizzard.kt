@@ -1,7 +1,11 @@
 package eu.beeadev.blizzard
 
+import eu.beeadev.blizzard.commands.FlyCommand
+import eu.beeadev.blizzard.commands.GodCommand
+import eu.beeadev.blizzard.commands.InstantBreakCommand
 import eu.beeadev.blizzard.events.HandlePlayerJoinEvent
 import net.minestom.server.MinecraftServer
+import net.minestom.server.MinecraftServer.getCommandManager
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 
@@ -19,12 +23,18 @@ object Blizzard {
         instanceContainer.setGenerator { unit: GenerationUnit ->
             unit.modifier().fillHeight(0, 40, Block.GRASS_BLOCK)
         }
-
+        registerCommands()
         registerEvents()
         minecraftServer.start("0.0.0.0", 25565)
     }
 
     private fun registerEvents() {
         HandlePlayerJoinEvent()
+    }
+
+    private fun registerCommands() {
+        getCommandManager().register(FlyCommand())
+        getCommandManager().register(InstantBreakCommand())
+        getCommandManager().register(GodCommand())
     }
 }
