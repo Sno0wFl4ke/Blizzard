@@ -41,7 +41,7 @@ class HandlePlayerJoinEvent() : Event {
             val connectionManager: ConnectionManager = ConnectionManager()
             connectionManager.setUuidProvider { playerConnection, username -> UUID.randomUUID() }
             System.out.println(player.playerConnection.player?.uuid)
-
+            //TODO: Skins
         }
     }
 }
