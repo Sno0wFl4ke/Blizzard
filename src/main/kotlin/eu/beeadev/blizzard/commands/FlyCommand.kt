@@ -19,14 +19,14 @@ class FlyCommand : Command("fly", "flight", "togglefly"), CommandExecutor {
             return
         }
             //if(player.hasPermission("blizzard.fly")) {
-        if (!sender.isAllowFlying) {
-            sender.isAllowFlying = true
-            sender.sendMessage("${Blizzard.PREFIX}§7Fly §8→ §a✔")
-        } else {
-            sender.isAllowFlying = false
-            if (sender.isFlying) sender.isFlying = false
-            sender.sendMessage("${Blizzard.PREFIX}§7Fly §8→ §c✖")
-        }
+            if (!sender.isAllowFlying) {
+                sender.isAllowFlying = true
+                sender.sendMessage("${Blizzard.PREFIX}§7Fly §8→ §a✔")
+            } else {
+                sender.isAllowFlying = false
+                if (sender.isFlying) sender.isFlying = false
+                sender.sendMessage("${Blizzard.PREFIX}§7Fly §8→ §c✖")
+            }
     }
 
 }

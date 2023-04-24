@@ -10,6 +10,8 @@ import net.minestom.server.entity.PlayerSkin
 import net.minestom.server.event.Event
 import net.minestom.server.event.player.PlayerLoginEvent
 import net.minestom.server.item.*
+import net.minestom.server.network.ConnectionManager
+import java.util.*
 
 
 class HandlePlayerJoinEvent() : Event {
@@ -36,6 +38,9 @@ class HandlePlayerJoinEvent() : Event {
                 .build()
             player.inventory.addItemStack(item)
 
+            val connectionManager: ConnectionManager = ConnectionManager()
+            connectionManager.setUuidProvider { playerConnection, username -> UUID.randomUUID() }
+            System.out.println(player.playerConnection.player?.uuid)
 
         }
     }
