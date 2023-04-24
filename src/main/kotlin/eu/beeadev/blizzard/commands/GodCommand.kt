@@ -9,25 +9,22 @@ import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 
 
-class GodCommand : Command("god", "invincible") {
+class GodCommand : Command("god", "invincible"), CommandExecutor {
     init {
-        defaultExecutor = CommandExecutor { sender: CommandSender, context: CommandContext? ->
-            run {
-                if (sender is Player) {
-                    val player: Player = sender.asPlayer()
-                    //if(player.hasPermission("blizzard.god")) {
-                    if (!player.isInvulnerable) {
-                        player.isInvulnerable = true
-                        player.sendMessage(Blizzard.prefix + "§7God §8→ §a✔")
-                    } else {
-                        player.isInvulnerable = false
-                        player.sendMessage(Blizzard.prefix + "§7God  §8→ §c✖")
-                    }
-                    //}
-                } else {
-                    sender.sendMessage("§cYou can only execute this command as a player!")
-                }
-            }
+        defaultExecutor = this
+    }
+    override fun apply(sender: CommandSender, context: CommandContext) {
+        if (sender !is Player) {
+            sender.sendMessage("§cYou can only execute this command as a player!")
+            return
+        }
+        //if(player.hasPermission("blizzard.fly")) {
+        if (!sender.isInvulnerable) {
+            sender.isInvulnerable = true
+            sender.sendMessage("${Blizzard.PREFIX}§7God §8→ §a✔")
+        } else {
+            sender.isInvulnerable = false
+            sender.sendMessage("${Blizzard.PREFIX}§7God §8→ §c✖")
         }
     }
 

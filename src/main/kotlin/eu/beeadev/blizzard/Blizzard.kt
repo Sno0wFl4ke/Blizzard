@@ -7,6 +7,7 @@ import eu.beeadev.blizzard.commands.SuicideCommand
 import eu.beeadev.blizzard.events.HandlePlayerJoinEvent
 import net.minestom.server.MinecraftServer
 import net.minestom.server.MinecraftServer.getCommandManager
+import net.minestom.server.command.builder.Command
 import net.minestom.server.instance.block.Block
 import net.minestom.server.instance.generator.GenerationUnit
 
@@ -14,7 +15,7 @@ import net.minestom.server.instance.generator.GenerationUnit
 object Blizzard {
 
     @JvmStatic
-    val prefix: String = "§8【§bBlizzard§8】"
+    var PREFIX: String = "§8【§bBlizzard§8】"
     val minecraftServer = MinecraftServer.init()
     val instanceManager = MinecraftServer.getInstanceManager()
     val instanceContainer = instanceManager.createInstanceContainer()

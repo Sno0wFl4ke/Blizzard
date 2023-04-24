@@ -9,22 +9,18 @@ import net.minestom.server.command.builder.CommandExecutor
 import net.minestom.server.entity.Player
 
 
-class SuicideCommand : Command("suicide") {
+class SuicideCommand : Command("suicide"), CommandExecutor {
     init {
-        defaultExecutor = CommandExecutor { sender: CommandSender, context: CommandContext? ->
-            run {
-                if (sender is Player) {
-                    val player: Player = sender.asPlayer()
-                    //if(player.hasPermission("blizzard.suicide")) {
-                    player.sendMessage(Blizzard.prefix + "§c☠ §7You have killed yourself!")
-                    player.instance?.sendMessage(Component.text("§c☠ §f${player.username} §7died through suicide!"))
-                    player.health = 0.0F
-                    //}
-                } else {
-                    sender.sendMessage("§cYou can only execute this command as a player!")
-                }
-            }
+        defaultExecutor = this
+    }
+    override fun apply(sender: CommandSender, context: CommandContext) {
+        if (sender !is Player) {
+            sender.sendMessage("§cYou can only execute this command as a player!")
+            return
         }
+        //if(!player.hasPermission("blizzard.fly")) return;
+        sender.health = 0.0F
+        sender.sendMessage("${Blizzard.PREFIX}§7You killed yourself")
     }
 
 }

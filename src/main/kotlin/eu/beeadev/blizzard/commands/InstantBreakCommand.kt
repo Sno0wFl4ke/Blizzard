@@ -9,25 +9,22 @@ import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 
 
-class InstantBreakCommand : Command("instantbreak", "ib") {
+class InstantBreakCommand : Command("instantbreak", "ib"), CommandExecutor{
     init {
-        defaultExecutor = CommandExecutor { sender: CommandSender, context: CommandContext? ->
-            run {
-                if (sender is Player) {
-                    val player: Player = sender.asPlayer()
-                    //if(player.hasPermission("blizzard.instantbreak")) {
-                    if (!player.isInstantBreak) {
-                        player.isInstantBreak = true
-                        player.sendMessage(Blizzard.prefix + "§7Instant break §8→ §a✔")
-                    } else {
-                        player.isInstantBreak = false
-                        player.sendMessage(Blizzard.prefix + "§7Instant break §8→ §c✖")
-                    }
-                    //}
-                } else {
-                    sender.sendMessage("§cYou can only execute this command as a player!")
-                }
-            }
+        defaultExecutor = this
+    }
+    override fun apply(sender: CommandSender, context: CommandContext) {
+        if (sender !is Player) {
+            sender.sendMessage("§cYou can only execute this command as a player!")
+            return
+        }
+        //if(player.hasPermission("blizzard.fly")) {
+        if (!sender.isInstantBreak) {
+            sender.isInstantBreak = true
+            sender.sendMessage("${Blizzard.PREFIX}§7Instant break §8→ §a✔")
+        } else {
+            sender.isInstantBreak = false
+            sender.sendMessage("${Blizzard.PREFIX}§7Instant break §8→ §c✖")
         }
     }
 
